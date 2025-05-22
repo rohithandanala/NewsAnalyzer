@@ -1,0 +1,6 @@
+true_data: Data/True.csv
+fake_data: Data/Fake.csv
+processed_data: Data/processed_data.csv
+
+min_article_length: 20
+max_article_length: 4000
