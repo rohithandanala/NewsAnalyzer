@@ -16,4 +16,5 @@ def process_data(data: pd.DataFrame):
     xv_train = vectorizer.fit_transform(x_train)
     xv_test = vectorizer.transform(x_test)  
 
-    return xv_train, xv_test, Y_train, Y_test
+
+    return xv_train, xv_test, Y_train, Y_test, vectorizer

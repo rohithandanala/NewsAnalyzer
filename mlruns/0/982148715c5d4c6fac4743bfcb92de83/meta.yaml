@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/rohit/OneDrive/Desktop/Projects_main/News/mlruns/0/982148715c5d4c6fac4743bfcb92de83/artifacts
+end_time: 1747950318030
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 982148715c5d4c6fac4743bfcb92de83
+run_name: logisticRegressionV1
+run_uuid: 982148715c5d4c6fac4743bfcb92de83
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1747950307134
+status: 3
+tags: []
+user_id: rohit

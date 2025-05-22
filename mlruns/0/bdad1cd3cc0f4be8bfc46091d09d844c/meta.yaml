@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/rohit/OneDrive/Desktop/Projects_main/News/mlruns/0/bdad1cd3cc0f4be8bfc46091d09d844c/artifacts
+end_time: 1747919897223
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: bdad1cd3cc0f4be8bfc46091d09d844c
+run_name: zealous-squid-153
+run_uuid: bdad1cd3cc0f4be8bfc46091d09d844c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1747919884120
+status: 4
+tags: []
+user_id: rohit

@@ -5,6 +5,8 @@ from src.models import LogisticRegression
 from src import model_prediction
 import pandas as pd
 import os
+import mlflow
+from src import mlflow_wrapper
 
 def train_and_predict(config_path: str = 'Configs'):
     with open(config_path + '/configs.yaml','r') as f:
@@ -52,7 +54,7 @@ def train_and_predict(config_path: str = 'Configs'):
     df = pd.read_csv(data_configs["processed_data"])
 
     #Preparing data for model training
-    x_train, x_test, y_train, y_test = process_training_data.process_data(df)
+    x_train, x_test, y_train, y_test, vectorizer = process_training_data.process_data(df)
 
     #training model
     model = LogisticRegression.lr(x_train, y_train)
@@ -61,10 +63,27 @@ def train_and_predict(config_path: str = 'Configs'):
     prediction = model_prediction.predict_model(model, x_test)
 
     #Calculating model accuracy
-    model.score(x_test, y_test)
+    accuracy = model.score(x_test, y_test)
 
     #Saving model
-    save_model.save_trained_model(model, "logisticRegressionV1")
+    model_name = data_configs['model_name']
+    arctifacts = save_model.save_trained_model(model, vectorizer, model_name, data_configs['save_path'])
+    
+    #Logging everythig in mlflow
+    with mlflow.start_run(run_name=model_name):
+        # Log params and metrics
+        mlflow.log_param("model_type", model_name)
+        mlflow.log_metric("accuracy", accuracy)
+
+        # Log artifacts
+        mlflow.pyfunc.log_model(
+            artifact_path="text_classifier",
+            python_model=mlflow_wrapper.TextClassifierWrapper(),
+            artifacts=arctifacts
+        )
+
+        print(f"✅ Logged {model_name} — Accuracy: {accuracy:.4f}")
+
 
 
 

@@ -1,0 +1,25 @@
+artifact_path: text_classifier
+flavors:
+  python_function:
+    artifacts:
+      model:
+        path: artifacts\model.joblib
+        uri: Models/logisticRegressionV1/model.joblib
+      vectorizer:
+        path: artifacts\vectorizer.joblib
+        uri: Models/logisticRegressionV1/vectorizer.joblib
+    cloudpickle_version: 3.0.0
+    code: null
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.pyfunc.model
+    python_model: python_model.pkl
+    python_version: 3.11.9
+    streamable: false
+mlflow_version: 2.21.3
+model_size_bytes: 5646224
+model_uuid: 7be898bb09644051a5daeb8ba31a813e
+prompts: null
+run_id: 99200c8f84c742dfb1e6a863eab5eb94
+utc_time_created: '2025-05-22 17:33:29.923092'

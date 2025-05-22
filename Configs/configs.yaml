@@ -4,3 +4,6 @@ processed_data: Data/processed_data.csv
 
 min_article_length: 20
 max_article_length: 4000
+
+save_path: Models/
+model_name: logisticRegressionV1
