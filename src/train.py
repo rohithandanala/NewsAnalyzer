@@ -8,12 +8,12 @@ import os
 import mlflow
 from src import mlflow_wrapper
 
-def train_and_predict(config_path: str = 'Configs'):
+def train_and_predict(config_path: str = 'Configs', update_data: bool = False):
     with open(config_path + '/configs.yaml','r') as f:
         data_configs = yaml.safe_load(f)
 
     #Checking if processed data is available or not
-    if not os.path.exists(data_configs['processed_data']):
+    if not os.path.exists(data_configs['processed_data']) or update_data:
 
         true_data = load_data.fetch_data(data_configs['true_data'])
         fake_data = load_data.fetch_data(data_configs['fake_data'])

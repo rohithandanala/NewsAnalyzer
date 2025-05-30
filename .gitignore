@@ -4,7 +4,3 @@ Data/
 
 # Ignore specific file types
 *.csv
-*.tsv
-*.json
-*.xlsx
-*.parquet

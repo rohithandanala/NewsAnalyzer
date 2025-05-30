@@ -1,3 +1,6 @@
 nltk
 sklearn
 joblib
+mlflow
+fastapi
+pydantic
