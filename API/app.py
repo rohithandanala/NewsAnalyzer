@@ -52,7 +52,7 @@ def predict_from_local_csv():
             print('Predictions on data not found.')
             df = run_prediction_on_file.run_prediction()
             print('predictions done on data')
-
+        df = pd.read_csv('/home/ec2-user/NewsAnalyzer/Datatrending_news.csv')
         # Return as JSON
         return {"results": df.to_dict(orient="records")}
 
