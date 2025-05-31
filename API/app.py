@@ -44,7 +44,7 @@ def predict_from_local_csv():
         df = pd.read_csv(PATH)
 
         # Check if required column exists
-        if 'text' not in df.columns:
+        if 'summary' not in df.columns:
             return JSONResponse(status_code=400, content={"error": "'text' column not found in CSV"})
 
         if 'pred' not in df.colums:
