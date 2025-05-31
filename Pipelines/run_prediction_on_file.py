@@ -10,3 +10,4 @@ def run_prediction():
     data['pred'] = data['title'].apply(predict_text)
 
     data.to_csv(PATH)
+    return data

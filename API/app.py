@@ -47,9 +47,9 @@ def predict_from_local_csv():
         if 'summary' not in df.columns:
             return JSONResponse(status_code=400, content={"error": "'text' column not found in CSV"})
 
-        if 'pred' not in df.colums:
+        if 'pred' not in df.columns:
             print('Predictions on data not found.')
-            run_prediction_on_file()
+            df = run_prediction_on_file()
             print('predictions done on data')
 
         # Return as JSON
