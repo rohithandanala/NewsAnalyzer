@@ -11,4 +11,4 @@ model_name: logisticRegressionV2
 bucket_path: /home/ec2-user/NewsBucketMount/news_data/trending_news.csv
 data_path: /home/ec2-user/NewsData/trending_news.csv
 
-prediction_key: rohith@12345
+prediction_key: a73f4a8e9c2b47f4a1c1bd9e6aaf5d5b

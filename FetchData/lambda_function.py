@@ -52,6 +52,17 @@ def lambda_handler(event=None, context=None):
             Body=csv_buffer.getvalue()
         )
 
+        url = "http://34.203.226.187/run_predictions"  # Replace with your EC2 public IP or DNS
+        headers = {
+            "accept": "application/json",
+            "Content-Type": "application/json"
+        }
+        payload = {
+            "text": "rohith@12345"  # This must match your `data_configs['prediction_key']`
+        }
+
+        response = requests.post(url, headers=headers, data=json.dumps(payload))
+
         return {
             "statusCode": 200,
             "body": json.dumps({"message": "News data fetched and stored to S3 successfully"})
