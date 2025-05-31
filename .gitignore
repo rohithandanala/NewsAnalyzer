@@ -1,6 +1,6 @@
 # Ignore all files in the Data folder
 Data/
-
+FetchData/
 
 # Ignore specific file types
 *.csv
