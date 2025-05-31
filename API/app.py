@@ -23,13 +23,6 @@ PATH = data_configs['bucket_path']
 class TextInput(BaseModel):
     text: str
 
-@app.get("/working-dir")
-def get_working_directory():
-    try:
-        cwd = os.getcwd()
-        return {"working_directory": cwd}
-    except Exception as e:
-        return {"error": str(e)}
 
 @app.get("/")
 def root():
