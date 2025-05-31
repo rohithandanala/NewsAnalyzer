@@ -11,9 +11,13 @@ from Pipelines import run_prediction_on_file
 import pandas as pd
 import traceback
 import numpy as np
+import yaml
+
+with open('Configs' + '/configs.yaml','r') as f:
+    data_configs = yaml.safe_load(f)
 
 app = FastAPI(title="Fake News Detection API")
-PATH = "/home/ec2-user/NewsBucketMount/news_data/trending_news.csv"
+PATH = data_configs['bucket_path']
 
 # Input schema
 class TextInput(BaseModel):
@@ -39,10 +43,10 @@ def predict(input: TextInput):
     except Exception as e:
         return {"error": str(e)}
     
-@app.get("/predict_local_csv")
-def predict_from_local_csv():
+@app.get("/get_data")
+def get_data():
     try:
-        df = pd.read_csv('/home/ec2-user/NewsData/trending_news.csv')
+        df = pd.read_csv(data_configs['data_path'])
         # Return as JSON
         safe_df = df.replace({np.nan: None, np.inf: None, -np.inf: None})
         return JSONResponse(content=safe_df.to_dict(orient="records"))
@@ -58,8 +62,11 @@ def predict_from_local_csv():
         }
 
 @app.get('/run_predictions')
-def run_predictions():
+def run_predictions(input: TextInput):
     try:
+        if input != data_configs['prediction_key']:
+            return 'prediction key is incorrect.'
+        print('prediction key is authorized.')
         # Read the CSV file (update the path as needed)
         df = pd.read_csv(PATH)
 
@@ -69,7 +76,7 @@ def run_predictions():
 
         if 'pred' not in df.columns:
             print('Predictions on data not found.')
-            df = run_prediction_on_file.run_prediction()
+            df = run_prediction_on_file.run_prediction(PATH, data_configs['data_path'])
             print('predictions done on data')
     except FileNotFoundError:
         return JSONResponse(status_code=404, content={"error": "CSV file not found"})

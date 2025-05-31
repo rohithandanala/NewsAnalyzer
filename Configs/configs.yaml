@@ -7,3 +7,8 @@ max_article_length: 4000
 
 save_path: Models/
 model_name: logisticRegressionV2
+
+bucket_path: /home/ec2-user/NewsBucketMount/news_data/trending_news.csv
+data_path: /home/ec2-user/NewsData/trending_news.csv
+
+prediction_key: rohith@12345
