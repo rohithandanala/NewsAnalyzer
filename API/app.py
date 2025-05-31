@@ -42,17 +42,6 @@ def predict(input: TextInput):
 @app.get("/predict_local_csv")
 def predict_from_local_csv():
     try:
-        # Read the CSV file (update the path as needed)
-        df = pd.read_csv(PATH)
-
-        # Check if required column exists
-        if 'summary' not in df.columns:
-            return JSONResponse(status_code=400, content={"error": "'text' column not found in CSV"})
-
-        if 'pred' not in df.columns:
-            print('Predictions on data not found.')
-            df = run_prediction_on_file.run_prediction()
-            print('predictions done on data')
         df = pd.read_csv('/home/ec2-user/NewsData/trending_news.csv')
         # Return as JSON
         safe_df = df.replace({np.nan: None, np.inf: None, -np.inf: None})
@@ -68,3 +57,26 @@ def predict_from_local_csv():
             "traceback": tb
         }
 
+@app.get('/run_predictions')
+def run_predictions():
+    try:
+        # Read the CSV file (update the path as needed)
+        df = pd.read_csv(PATH)
+
+        # Check if required column exists
+        if 'summary' not in df.columns:
+            return JSONResponse(status_code=400, content={"error": "'text' column not found in CSV"})
+
+        if 'pred' not in df.columns:
+            print('Predictions on data not found.')
+            df = run_prediction_on_file.run_prediction()
+            print('predictions done on data')
+    except FileNotFoundError:
+        return JSONResponse(status_code=404, content={"error": "CSV file not found"})
+
+    except Exception as e:
+        tb = traceback.format_exc()
+        return {
+            "error": str(e),
+            "traceback": tb
+        }
