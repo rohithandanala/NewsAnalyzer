@@ -11,7 +11,7 @@ from Pipelines import run_prediction_on_file
 import pandas as pd
 
 app = FastAPI(title="Fake News Detection API")
-PATH = "../news_data/trending_news.csv"
+PATH = "/home/ec2-user/NewsBucketMount/news_data/trending_news.csv"
 
 # Input schema
 class TextInput(BaseModel):

@@ -2,7 +2,7 @@ from src import predict_text
 import pandas as pd
 
 
-PATH = "../news_data/trending_news.csv"
+PATH = "/home/ec2-user/NewsBucketMount/news_data/trending_news.csv"
 
 def run_prediction():
     data = pd.read_csv(PATH)
