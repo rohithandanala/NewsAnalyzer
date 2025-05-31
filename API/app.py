@@ -64,7 +64,7 @@ def get_data():
 @app.post('/run_predictions')
 def run_predictions(input: TextInput):
     try:
-        if input != data_configs['prediction_key']:
+        if input.text != data_configs['prediction_key']:
             return JSONResponse(status_code=401, content={"error": data_configs['prediction_key']})
 
         print('prediction key is authorized.')
