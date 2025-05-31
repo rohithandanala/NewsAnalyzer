@@ -4,3 +4,5 @@ joblib
 mlflow
 fastapi
 pydantic
+request
+uvicorn
