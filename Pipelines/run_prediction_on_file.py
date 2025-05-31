@@ -7,7 +7,7 @@ PATH = "/home/ec2-user/NewsBucketMount/news_data/trending_news.csv"
 def run_prediction():
     data = pd.read_csv(PATH)
 
-    data['pred'] = data['title'].apply(predict_text)
+    data['pred'] = data['title'].apply(predict_text.predict_text)
 
     data.to_csv(PATH)
     return data
