@@ -10,6 +10,7 @@ from fastapi.responses import JSONResponse
 from Pipelines import run_prediction_on_file
 import pandas as pd
 import traceback
+import numpy as np
 
 app = FastAPI(title="Fake News Detection API")
 PATH = "/home/ec2-user/NewsBucketMount/news_data/trending_news.csv"
@@ -54,7 +55,8 @@ def predict_from_local_csv():
             print('predictions done on data')
         df = pd.read_csv('/home/ec2-user/NewsAnalyzer/Datatrending_news.csv')
         # Return as JSON
-        return {"results": df.to_dict(orient="records")}
+        safe_df = df.replace({np.nan: None, np.inf: None, -np.inf: None})
+        return JSONResponse(content=safe_df.to_dict(orient="records"))
 
     except FileNotFoundError:
         return JSONResponse(status_code=404, content={"error": "CSV file not found"})
