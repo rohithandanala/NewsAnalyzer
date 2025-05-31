@@ -61,11 +61,12 @@ def get_data():
             "traceback": tb
         }
 
-@app.get('/run_predictions')
+@app.post('/run_predictions')
 def run_predictions(input: TextInput):
     try:
         if input != data_configs['prediction_key']:
-            return 'prediction key is incorrect.'
+            return JSONResponse(status_code=401, content={"error": "Prediction key is incorrect."})
+
         print('prediction key is authorized.')
         # Read the CSV file (update the path as needed)
         df = pd.read_csv(PATH)
