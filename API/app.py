@@ -9,6 +9,7 @@ from src import predict_text
 from fastapi.responses import JSONResponse
 from Pipelines import run_prediction_on_file
 import pandas as pd
+import traceback
 
 app = FastAPI(title="Fake News Detection API")
 PATH = "/home/ec2-user/NewsBucketMount/news_data/trending_news.csv"
@@ -59,5 +60,9 @@ def predict_from_local_csv():
         return JSONResponse(status_code=404, content={"error": "CSV file not found"})
 
     except Exception as e:
-        return JSONResponse(status_code=500, content={"error": str(e)})
+        tb = traceback.format_exc()
+        return {
+            "error": str(e),
+            "traceback": tb
+        }
 
