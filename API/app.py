@@ -8,6 +8,7 @@ from pydantic import BaseModel
 from src import predict_text
 from fastapi.responses import JSONResponse
 from Pipelines import run_prediction_on_file
+import pandas as pd
 
 app = FastAPI(title="Fake News Detection API")
 PATH = "../news_data/trending_news.csv"
