@@ -3,7 +3,7 @@ import pandas as pd
 
 
 PATH = "/home/ec2-user/NewsBucketMount/news_data/trending_news.csv"
-save_path = "/home/ec2-user/NewsAnalyzer/Datatrending_news.csv"
+save_path = "Data/trending_news.csv"
 
 def run_prediction():
     data = pd.read_csv(PATH)
