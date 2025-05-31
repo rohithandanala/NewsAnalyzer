@@ -50,7 +50,7 @@ def predict_from_local_csv():
 
         if 'pred' not in df.columns:
             print('Predictions on data not found.')
-            df = run_prediction_on_file()
+            df = run_prediction_on_file.run_prediction()
             print('predictions done on data')
 
         # Return as JSON
