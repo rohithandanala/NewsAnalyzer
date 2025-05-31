@@ -65,7 +65,7 @@ def get_data():
 def run_predictions(input: TextInput):
     try:
         if input.text != data_configs['prediction_key']:
-            return JSONResponse(status_code=401, content={"error": data_configs['prediction_key']})
+            return JSONResponse(status_code=401, content={"error": "Unable to authorize request"})
 
         print('prediction key is authorized.')
         # Read the CSV file (update the path as needed)
