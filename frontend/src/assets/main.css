@@ -1,0 +1,11 @@
+#app {
+  margin: 0 auto;
+  padding: 2rem;
+  font-weight: normal;
+  background-color: #242323;
+  color: #e0e0e0;
+}
+.card {
+  background-color: #1e1e1e;
+  color: #ffffff;
+}

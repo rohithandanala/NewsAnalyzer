@@ -4,6 +4,7 @@ os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from src import predict_text
 from fastapi.responses import JSONResponse
@@ -17,6 +18,15 @@ with open('Configs' + '/configs.yaml','r') as f:
     data_configs = yaml.safe_load(f)
 
 app = FastAPI(title="Fake News Detection API")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],  # Your Vite dev server origin
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 PATH = data_configs['bucket_path']
 
 # Input schema
@@ -24,9 +34,6 @@ class TextInput(BaseModel):
     text: str
 
 
-@app.get("/")
-def root():
-    return {"message": "Fake News Detection API is running!"}
 
 @app.post("/predict")
 def predict(input: TextInput):
@@ -81,3 +88,21 @@ def run_predictions(input: TextInput):
             "error": str(e),
             "traceback": tb
         }
+
+
+
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+
+FRONTEND_DIR = os.path.join("frontend", "dist")
+ASSETS_DIR = os.path.join(FRONTEND_DIR, "assets")
+
+# ✅ Mount static assets correctly
+app.mount("/assets", StaticFiles(directory=ASSETS_DIR, html=False), name="assets")
+
+# ✅ Serve index.html for all routes (catch-all)
+@app.get("/")
+@app.get("/{full_path:path}")
+def serve_spa(full_path: str = ""):
+    index_file = os.path.join(FRONTEND_DIR, "index.html")
+    return FileResponse(index_file, media_type='text/html')
