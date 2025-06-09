@@ -20,7 +20,7 @@ with open('Configs' + '/configs.yaml','r') as f:
 app = FastAPI(title="Fake News Detection API")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # Your Vite dev server origin
+    allow_origins=["*"],  # Your Vite dev server origin
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
